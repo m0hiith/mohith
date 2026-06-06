@@ -61,7 +61,7 @@ const projects = [
 
 export default function Projects() {
   return (
-    <section id="projects" style={{ padding: "7rem 4rem", position: "relative", zIndex: 2 }}>
+    <section id="projects" className="section-pad" style={{ padding: "7rem 4rem", position: "relative", zIndex: 2 }}>
       <div style={{
         position: "absolute", inset: 0, zIndex: 0,
         background: "radial-gradient(ellipse 60% 50% at 80% 50%, rgba(59,130,246,0.05) 0%, transparent 70%)",
@@ -88,7 +88,7 @@ export default function Projects() {
 
         <div style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fill, minmax(min(340px, 100%), 1fr))",
           gap: "1px",
           background: "var(--border)",
         }}>

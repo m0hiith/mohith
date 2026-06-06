@@ -13,6 +13,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
+      className="section-pad-surface"
       style={{
         padding: "8rem 4rem",
         background: "var(--surface)",

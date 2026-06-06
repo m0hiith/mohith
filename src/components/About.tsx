@@ -58,7 +58,7 @@ function SkillBar({ name, pct, color, delay }: { name: string; pct: number; colo
 
 export default function About() {
   return (
-    <section id="about" style={{ padding: "7rem 4rem", position: "relative", zIndex: 2 }}>
+    <section id="about" className="section-pad" style={{ padding: "7rem 4rem", position: "relative", zIndex: 2 }}>
       {/* Faint grid bg */}
       <div style={{
         position: "absolute", inset: 0, zIndex: 0,
@@ -84,7 +84,7 @@ export default function About() {
           }}>engineer by training.</span>
         </h2>
 
-        <div style={{
+        <div className="about-grid" style={{
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
           gap: "5rem",

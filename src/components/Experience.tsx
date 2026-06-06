@@ -41,6 +41,7 @@ export default function Experience() {
   return (
     <section
       id="experience"
+      className="section-pad-surface"
       style={{
         padding: "7rem 4rem",
         background: "var(--surface)",
@@ -72,6 +73,7 @@ export default function Experience() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6, delay: i * 0.1 }}
+            className="exp-row"
             style={{
               display: "grid",
               gridTemplateColumns: "180px 1fr",

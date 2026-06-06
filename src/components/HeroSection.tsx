@@ -83,7 +83,7 @@ export default function HeroSection() {
       }} />
 
       {/* Left: Content */}
-      <div style={{
+      <div className="hero-content" style={{
         position: "relative", zIndex: 2,
         padding: "8rem 4rem 4rem",
         maxWidth: "900px",
@@ -179,6 +179,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4 }}
+          className="stats-row"
           style={{
             display: "flex", gap: "3rem", flexWrap: "wrap",
             marginTop: "4rem", paddingTop: "3rem",
@@ -213,6 +214,7 @@ export default function HeroSection() {
 
       {/* Right: Character Image */}
       <motion.div
+        className="hero-avatar"
         initial={{ opacity: 0, x: 60 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.9, delay: 0.2, ease: "easeOut" }}

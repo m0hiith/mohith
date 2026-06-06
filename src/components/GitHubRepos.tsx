@@ -42,6 +42,7 @@ export default function GitHubRepos() {
   return (
     <section
       id="github"
+      className="section-pad-surface"
       style={{ padding: "7rem 4rem", background: "var(--surface)", position: "relative", zIndex: 2 }}
     >
       <div className="section-tag">Live from GitHub</div>
@@ -99,7 +100,7 @@ export default function GitHubRepos() {
       {!loading && !error && (
         <div style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fill, minmax(min(300px, 100%), 1fr))",
           gap: "1px",
           background: "var(--border)",
         }}>
