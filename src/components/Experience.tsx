@@ -6,7 +6,7 @@ const experiences = [
   {
     year: "2026",
     company: "GITAM University",
-    role: "Head of Marketing — Shore Fest 2026",
+    role: "Lead of Marketing — Shore Fest 2026",
     bullets: [
       "Led cross-functional teams across Design, Media, PR & Outreach, and Tech for GITAM's largest cultural & sports festival.",
       "Drove <strong>11,000+ student attendees</strong> — a 40% YoY increase through multi-channel campaigns.",
