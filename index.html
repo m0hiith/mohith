@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mohith Pinninti — Builder & Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090c10;
+      --surface: #0e1318;
+      --surface2: #141b23;
+      --border: #1e2a35;
+      --accent: #00e5a0;
+      --accent2: #00b4f5;
+      --accent3: #ff6b35;
+      --text: #e8f0f8;
+      --muted: #6b8090;
+      --glow: rgba(0,229,160,0.12);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ── CUSTOM CURSOR ── */
+    #cursor {
+      width: 10px; height: 10px;
+      background: var(--accent);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 9999;
+      transition: transform 0.1s ease;
+      mix-blend-mode: difference;
+    }
+    #cursor-ring {
+      width: 36px; height: 36px;
+      border: 1px solid rgba(0,229,160,0.5);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 9998;
+      transition: transform 0.18s ease, width 0.2s, height 0.2s, opacity 0.2s;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 1; opacity: 0.5;
+    }
+
+    /* ── GRID BACKGROUND ── */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,229,160,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,229,160,0.025) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none; z-index: 0;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 4rem;
+      background: rgba(9,12,16,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 1.1rem;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem; letter-spacing: 0.12em;
+      color: var(--muted); text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 8rem 4rem 4rem;
+      position: relative; z-index: 2;
+    }
+    .hero-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem; color: var(--accent);
+      letter-spacing: 0.2em; text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .hero-tag::before {
+      content: ''; width: 32px; height: 1px; background: var(--accent);
+    }
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(3.5rem, 8vw, 8rem);
+      font-weight: 800; line-height: 0.95;
+      letter-spacing: -0.03em;
+    }
+    .hero h1 .name-accent { color: var(--accent); }
+    .hero-desc {
+      max-width: 580px;
+      margin-top: 2.5rem;
+      font-size: 1.1rem; line-height: 1.7;
+      color: var(--muted);
+    }
+    .hero-cta {
+      display: flex; gap: 1.2rem; margin-top: 3rem; flex-wrap: wrap;
+    }
+    .btn {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 0.85rem 2rem; border-radius: 2px;
+      text-decoration: none; transition: all 0.25s;
+      cursor: pointer; border: none;
+    }
+    .btn-primary {
+      background: var(--accent); color: #000; font-weight: 400;
+    }
+    .btn-primary:hover { background: #00ffb3; box-shadow: 0 0 32px var(--glow); }
+    .btn-outline {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    .hero-stats {
+      display: flex; gap: 4rem; margin-top: 5rem;
+      padding-top: 3rem; border-top: 1px solid var(--border);
+    }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.5rem; font-weight: 800; color: var(--accent);
+    }
+    .stat-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem; letter-spacing: 0.15em; color: var(--muted);
+      text-transform: uppercase; margin-top: 0.3rem;
+    }
+
+    /* ── SECTION BASE ── */
+    section {
+      position: relative; z-index: 2;
+      padding: 6rem 4rem;
+    }
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem; letter-spacing: 0.2em;
+      color: var(--accent); text-transform: uppercase;
+      margin-bottom: 1rem; display: flex; align-items: center; gap: 0.8rem;
+    }
+    .section-label::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 800; line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 4rem;
+    }
+
+    /* ── ABOUT / SKILLS ── */
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6rem;
+      align-items: start;
+    }
+    .about-text p {
+      font-size: 1.05rem; line-height: 1.85; color: var(--muted);
+      margin-bottom: 1.4rem;
+    }
+    .skills-grid {
+      display: flex; flex-direction: column; gap: 1.2rem;
+    }
+    .skill-row { }
+    .skill-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 0.5rem;
+    }
+    .skill-name {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem; letter-spacing: 0.1em; color: var(--text);
+      text-transform: uppercase;
+    }
+    .skill-pct {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem; color: var(--accent);
+    }
+    .skill-bar {
+      height: 2px; background: var(--border); border-radius: 1px; overflow: hidden;
+    }
+    .skill-fill {
+      height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 1px; width: 0;
+      transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* ── EXPERIENCE ── */
+    .exp-list { display: flex; flex-direction: column; gap: 0; }
+    .exp-item {
+      display: grid; grid-template-columns: 200px 1fr;
+      gap: 3rem; padding: 2.5rem 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .exp-item:first-child { border-top: 1px solid var(--border); }
+    .exp-meta {}
+    .exp-year {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem; color: var(--accent); letter-spacing: 0.12em;
+    }
+    .exp-company {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.9rem; font-weight: 700; color: var(--muted);
+      margin-top: 0.4rem;
+    }
+    .exp-role {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem;
+    }
+    .exp-bullets { list-style: none; }
+    .exp-bullets li {
+      font-size: 0.95rem; line-height: 1.7; color: var(--muted);
+      padding-left: 1.2rem; margin-bottom: 0.5rem; position: relative;
+    }
+    .exp-bullets li::before {
+      content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 0.8rem;
+    }
+    .exp-highlight {
+      color: var(--text); font-weight: 400;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.5px;
+      background: var(--border);
+    }
+    .project-card {
+      background: var(--surface);
+      padding: 2.2rem;
+      transition: background 0.2s;
+      position: relative; overflow: hidden;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .project-card:hover { background: var(--surface2); }
+    .project-card:hover::before { opacity: 1; }
+    .project-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem; color: var(--border);
+      margin-bottom: 1.5rem; letter-spacing: 0.1em;
+    }
+    .project-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.2rem; font-weight: 700; margin-bottom: 0.8rem;
+    }
+    .project-desc {
+      font-size: 0.9rem; line-height: 1.65; color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.1em;
+      padding: 0.3rem 0.75rem;
+      border: 1px solid var(--border); color: var(--muted);
+      text-transform: uppercase;
+    }
+    .project-link {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem; letter-spacing: 0.12em;
+      color: var(--accent); text-decoration: none; text-transform: uppercase;
+      display: flex; align-items: center; gap: 0.5rem;
+      transition: gap 0.2s;
+    }
+    .project-link:hover { gap: 0.9rem; }
+
+    /* ── GITHUB LIVE ── */
+    .github-section { background: var(--surface); }
+    #github-repos {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1px; background: var(--border); margin-top: 1rem;
+    }
+    .repo-card {
+      background: var(--surface); padding: 1.8rem;
+      transition: background 0.2s;
+    }
+    .repo-card:hover { background: var(--surface2); }
+    .repo-name {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.85rem; color: var(--accent2); margin-bottom: 0.6rem;
+    }
+    .repo-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.5; }
+    .repo-meta {
+      display: flex; gap: 1.2rem; margin-top: 1rem;
+      font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted);
+    }
+    .repo-lang { color: var(--accent); }
+    .loading-repos {
+      padding: 3rem;
+      font-family: 'DM Mono', monospace;
+      color: var(--muted); font-size: 0.85rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .spinner {
+      width: 16px; height: 16px;
+      border: 2px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── ACHIEVEMENTS ── */
+    .achieve-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1px; background: var(--border);
+    }
+    .achieve-card {
+      background: var(--surface); padding: 2rem;
+      transition: background 0.2s;
+    }
+    .achieve-card:hover { background: var(--surface2); }
+    .achieve-icon {
+      font-size: 1.6rem; margin-bottom: 1rem;
+    }
+    .achieve-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem; font-weight: 800; color: var(--accent);
+    }
+    .achieve-text {
+      font-size: 0.88rem; color: var(--muted); margin-top: 0.3rem; line-height: 1.5;
+    }
+
+    /* ── CONTACT ── */
+    .contact-section {
+      background: var(--surface);
+      text-align: center;
+    }
+    .contact-email {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.5rem, 4vw, 3rem);
+      font-weight: 800; color: var(--text);
+      text-decoration: none; display: inline-block;
+      margin: 2rem 0;
+      transition: color 0.2s;
+    }
+    .contact-email:hover { color: var(--accent); }
+    .social-links { display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; }
+    .social-link {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .social-link:hover { color: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem 4rem;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      z-index: 2; position: relative;
+    }
+    footer span {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem; color: var(--muted); letter-spacing: 0.08em;
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── HERO BLOBS ── */
+    .blob {
+      position: absolute; border-radius: 50%;
+      filter: blur(80px); pointer-events: none;
+    }
+    .blob-1 {
+      width: 480px; height: 480px;
+      background: radial-gradient(circle, rgba(0,229,160,0.08) 0%, transparent 70%);
+      top: 5%; right: 5%;
+      animation: float1 12s ease-in-out infinite;
+    }
+    .blob-2 {
+      width: 320px; height: 320px;
+      background: radial-gradient(circle, rgba(0,180,245,0.07) 0%, transparent 70%);
+      bottom: 10%; left: 10%;
+      animation: float2 9s ease-in-out infinite;
+    }
+    @keyframes float1 {
+      0%,100% { transform: translate(0,0) scale(1); }
+      50% { transform: translate(-30px, 20px) scale(1.05); }
+    }
+    @keyframes float2 {
+      0%,100% { transform: translate(0,0); }
+      50% { transform: translate(20px,-30px); }
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      section, .hero { padding: 5rem 1.5rem; }
+      .hero h1 { font-size: 3rem; }
+      .hero-stats { gap: 2rem; flex-wrap: wrap; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      footer { flex-direction: column; gap: 1rem; padding: 2rem 1.5rem; }
+    }
+
+    /* ── TYPED CURSOR ── */
+    .typed-cursor { color: var(--accent); animation: blink 1s step-end infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+  </style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">M.PINNINTI</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#github">GitHub</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="hero-tag">Available for opportunities</div>
+  <h1>
+    MOHITH<br>
+    <span class="name-accent">PINNINTI</span>
+  </h1>
+  <p class="hero-desc">
+    B.Tech ECE · AI/ML Engineer · Full-Stack Builder · Founder<br>
+    <span id="typed-text"></span><span class="typed-cursor">|</span>
+  </p>
+  <div class="hero-cta">
+    <a href="#projects" class="btn btn-primary">View Projects</a>
+    <a href="mailto:mohith4pinninti@gmail.com" class="btn btn-outline">Get in Touch</a>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <div class="stat-num">4+</div>
+      <div class="stat-label">AI Products Shipped</div>
+    </div>
+    <div>
+      <div class="stat-num">11K+</div>
+      <div class="stat-label">Event Attendees Led</div>
+    </div>
+    <div>
+      <div class="stat-num">6+</div>
+      <div class="stat-label">Clients at ScaleUp</div>
+    </div>
+    <div>
+      <div class="stat-num">22%</div>
+      <div class="stat-label">F1 Score Improvement</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">Who I am</div>
+  <div class="section-title">Builder by nature,<br>engineer by training.</div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>I'm a 3rd-year ECE student at GITAM University, Visakhapatnam, building at the intersection of AI engineering, full-stack development, and entrepreneurship. I don't just learn — I ship.</p>
+      <p>From fine-tuning LLMs with LoRA/QLoRA on Llama 2 & Mistral, to building RAG pipelines, algorithmic trading bots, and leading the marketing for a 11,000-student festival — I operate across multiple domains simultaneously.</p>
+      <p>I founded ScaleUp Marketing to solve a real problem: local businesses in Vizag struggling to go digital. Today it generates ₹1L+/month in client revenue.</p>
+    </div>
+    <div class="skills-grid reveal">
+      <div class="skill-row">
+        <div class="skill-header">
+          <span class="skill-name">AI / ML Engineering</span>
+          <span class="skill-pct">92%</span>
+        </div>
+        <div class="skill-bar"><div class="skill-fill" data-pct="92"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-header">
+          <span class="skill-name">Full-Stack Development</span>
+          <span class="skill-pct">88%</span>
+        </div>
+        <div class="skill-bar"><div class="skill-fill" data-pct="88"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-header">
+          <span class="skill-name">Algorithmic Trading</span>
+          <span class="skill-pct">82%</span>
+        </div>
+        <div class="skill-bar"><div class="skill-fill" data-pct="82"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-header">
+          <span class="skill-name">LLM Fine-tuning</span>
+          <span class="skill-pct">85%</span>
+        </div>
+        <div class="skill-bar"><div class="skill-fill" data-pct="85"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-header">
+          <span class="skill-name">Digital Marketing</span>
+          <span class="skill-pct">90%</span>
+        </div>
+        <div class="skill-bar"><div class="skill-fill" data-pct="90"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-header">
+          <span class="skill-name">Cloud & DevOps</span>
+          <span class="skill-pct">75%</span>
+        </div>
+        <div class="skill-bar"><div class="skill-fill" data-pct="75"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" style="background: var(--surface);">
+  <div class="section-label">Where I've worked</div>
+  <div class="section-title">Experience &<br>Ventures</div>
+  <div class="exp-list">
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-year">2026</div>
+        <div class="exp-company">GITAM University</div>
+      </div>
+      <div>
+        <div class="exp-role">Head of Marketing — Shore Fest 2026</div>
+        <ul class="exp-bullets">
+          <li>Led cross-functional teams across Design, Media, PR & Outreach, and Tech for GITAM's largest cultural & sports festival.</li>
+          <li>Drove <span class="exp-highlight">11,000+ student attendees</span> — a 40% increase over the previous year through multi-channel campaigns.</li>
+          <li>Managed 5+ brand partnerships, influencer collaborations, and zero-downtime website operations during peak event periods.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-year">Ongoing</div>
+        <div class="exp-company">Self-founded</div>
+      </div>
+      <div>
+        <div class="exp-role">Founder & Digital Marketing Lead — ScaleUp Marketing</div>
+        <ul class="exp-bullets">
+          <li>Founded and independently operate a digital marketing agency serving <span class="exp-highlight">6+ local businesses</span> across Visakhapatnam.</li>
+          <li>Consistently achieving <span class="exp-highlight">3x–5x ROAS</span> for clients via Meta Ads and end-to-end content strategy.</li>
+          <li>Generating approx. <span class="exp-highlight">₹1 lakh/month</span> in client revenue; average 2,000+ follower growth per client per month.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-year">2023–Now</div>
+        <div class="exp-company">GITAM University</div>
+      </div>
+      <div>
+        <div class="exp-role">B.Tech — Electronics & Communication Engineering</div>
+        <ul class="exp-bullets">
+          <li>Building alongside academics: 4 full-stack AI-powered products shipped solo during coursework.</li>
+          <li>Applying ECE fundamentals to embedded systems, signal processing, and hardware-software integration.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">What I've built</div>
+  <div class="section-title">Featured<br>Projects</div>
+  <div class="projects-grid">
+    <div class="project-card reveal">
+      <div class="project-num">01 / FINTECH</div>
+      <div class="project-name">CryptoBot CLI</div>
+      <div class="project-desc">Binance Futures algorithmic trading bot with 4-layer architecture, HMAC-signed REST calls, news sentiment analysis via VADER & FinBERT, and ~78% directional accuracy on backtested signals.</div>
+      <div class="project-tags">
+        <span class="tag">Python</span>
+        <span class="tag">Flask</span>
+        <span class="tag">React</span>
+        <span class="tag">FinBERT</span>
+        <span class="tag">Binance API</span>
+      </div>
+      <a href="https://github.com/m0hiith/binance-trading-bot" target="_blank" class="project-link">View on GitHub →</a>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">02 / AI PRODUCT</div>
+      <div class="project-name">TalentSia</div>
+      <div class="project-desc">AI career platform with ATS resume builder, skill gap analysis, interest-based career matching, and a job recommendation engine. Reduced average job-search time by ~35% in user testing. 100+ active users.</div>
+      <div class="project-tags">
+        <span class="tag">React</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">Supabase</span>
+        <span class="tag">Tailwind</span>
+        <span class="tag">Gemini</span>
+      </div>
+      <a href="https://github.com/m0hiith/career-compass" target="_blank" class="project-link">View on GitHub →</a>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">03 / LLM RESEARCH</div>
+      <div class="project-name">LLM Fine-Tuning & RAG Bots</div>
+      <div class="project-desc">Fine-tuned Llama 2 (7B) & Mistral (7B) using QLoRA (4-bit quantization). Built RAG pipelines with LangChain + FAISS. ~22% F1 improvement, ~30% reduction in hallucination rate.</div>
+      <div class="project-tags">
+        <span class="tag">Llama 2</span>
+        <span class="tag">Mistral</span>
+        <span class="tag">QLoRA</span>
+        <span class="tag">LangChain</span>
+        <span class="tag">FAISS</span>
+      </div>
+      <a href="https://github.com/m0hiith" target="_blank" class="project-link">View Profile →</a>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">04 / AI CHATBOT</div>
+      <div class="project-name">AI Admission Chatbot</div>
+      <div class="project-desc">Intelligent college admission chatbot handling 200+ daily queries with under 2s average response time. Reduced manual inquiry effort by ~60% through automated query classification and routing.</div>
+      <div class="project-tags">
+        <span class="tag">Python</span>
+        <span class="tag">NLP</span>
+        <span class="tag">Flask</span>
+        <span class="tag">Gemini</span>
+      </div>
+      <a href="https://github.com/m0hiith" target="_blank" class="project-link">View Profile →</a>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">05 / SOCIAL PLATFORM</div>
+      <div class="project-name">AI Prompt Gallery</div>
+      <div class="project-desc">Pinterest-inspired social platform for discovering and sharing AI image prompts. Masonry grid, community content, social engagement, and a Twitter-algorithm-inspired recommendation engine. 50+ beta users in week 1.</div>
+      <div class="project-tags">
+        <span class="tag">React</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">Firebase</span>
+        <span class="tag">Vite</span>
+      </div>
+      <a href="https://github.com/m0hiith/prompt-gallery" target="_blank" class="project-link">View on GitHub →</a>
+    </div>
+    <div class="project-card reveal" style="background: linear-gradient(135deg, rgba(0,229,160,0.05), transparent);">
+      <div class="project-num">06 / MARKETING</div>
+      <div class="project-name">ScaleUp Marketing</div>
+      <div class="project-desc">Founded and running a live digital marketing agency — not a project, a business. End-to-end Meta Ads, content creation, social media management for 6+ local Visakhapatnam businesses.</div>
+      <div class="project-tags">
+        <span class="tag">Meta Ads</span>
+        <span class="tag">Content</span>
+        <span class="tag">E-commerce</span>
+        <span class="tag">Strategy</span>
+      </div>
+      <span class="project-link" style="cursor:default; color: var(--accent3);">Live Business ✦</span>
+    </div>
+  </div>
+</section>
+
+<!-- GITHUB LIVE REPOS -->
+<section id="github" class="github-section">
+  <div class="section-label">Live from GitHub</div>
+  <div class="section-title">Public<br>Repositories</div>
+  <div id="github-repos">
+    <div class="loading-repos">
+      <div class="spinner"></div>
+      Fetching repositories from github.com/m0hiith…
+    </div>
+  </div>
+  <p style="margin-top:1.5rem; font-family:'DM Mono',monospace; font-size:0.72rem; color:var(--muted);">
+    → <a href="https://github.com/m0hiith" target="_blank" style="color:var(--accent2); text-decoration:none;">github.com/m0hiith</a>
+  </p>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-label">Numbers that matter</div>
+  <div class="section-title">Achievements</div>
+  <div class="achieve-grid">
+    <div class="achieve-card reveal">
+      <div class="achieve-icon">🎯</div>
+      <div class="achieve-num">11,000+</div>
+      <div class="achieve-text">Student attendees at Shore Fest 2026 — 40% growth YoY</div>
+    </div>
+    <div class="achieve-card reveal">
+      <div class="achieve-icon">⚡</div>
+      <div class="achieve-num">4 Products</div>
+      <div class="achieve-text">Full-stack AI products shipped solo on production infrastructure</div>
+    </div>
+    <div class="achieve-card reveal">
+      <div class="achieve-icon">📈</div>
+      <div class="achieve-num">3–5× ROAS</div>
+      <div class="achieve-text">Consistent return on ad spend across all ScaleUp Marketing clients</div>
+    </div>
+    <div class="achieve-card reveal">
+      <div class="achieve-icon">🤖</div>
+      <div class="achieve-num">22% F1↑</div>
+      <div class="achieve-text">Task-specific improvement via QLoRA fine-tuning on Llama 2 & Mistral</div>
+    </div>
+    <div class="achieve-card reveal">
+      <div class="achieve-icon">🧪</div>
+      <div class="achieve-num">95%+</div>
+      <div class="achieve-text">Unit test coverage on CryptoBot CLI with mocked HTTP calls</div>
+    </div>
+    <div class="achieve-card reveal">
+      <div class="achieve-icon">💰</div>
+      <div class="achieve-num">₹1L/mo</div>
+      <div class="achieve-text">Monthly client revenue generated through ScaleUp Marketing</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="section-label">Let's connect</div>
+  <div class="section-title">Got an idea?<br>Let's build it.</div>
+  <a href="mailto:mohith4pinninti@gmail.com" class="contact-email">
+    mohith4pinninti@gmail.com
+  </a>
+  <div class="social-links">
+    <a href="https://github.com/m0hiith" target="_blank" class="social-link">GitHub ↗</a>
+    <a href="tel:+917032116746" class="social-link">+91 70321 16746</a>
+    <a href="#" class="social-link">Visakhapatnam, IN</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2026 Mohith Pinninti</span>
+  <span>ECE · GITAM University · Visakhapatnam</span>
+  <span>Built with <span style="color:var(--accent)">♥</span> & raw HTML/CSS/JS</span>
+</footer>
+
+<script>
+  // ── CURSOR
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursor-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  function animateCursor() {
+    rx += (mx - rx) * 0.15;
+    ry += (my - ry) * 0.15;
+    cursor.style.transform = `translate(${mx - 5}px, ${my - 5}px)`;
+    ring.style.transform = `translate(${rx - 18}px, ${ry - 18}px)`;
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+  document.querySelectorAll('a, button, .project-card').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      ring.style.width = '54px'; ring.style.height = '54px';
+      ring.style.borderColor = 'var(--accent)';
+    });
+    el.addEventListener('mouseleave', () => {
+      ring.style.width = '36px'; ring.style.height = '36px';
+      ring.style.borderColor = 'rgba(0,229,160,0.5)';
+    });
+  });
+
+  // ── TYPED EFFECT
+  const phrases = [
+    'LLM fine-tuning with QLoRA',
+    'RAG pipelines with LangChain',
+    'Algorithmic trading bots',
+    'Full-stack React + TypeScript',
+    'Founder of ScaleUp Marketing'
+  ];
+  let pi = 0, ci = 0, deleting = false;
+  const el = document.getElementById('typed-text');
+  function type() {
+    const current = phrases[pi];
+    if (!deleting) {
+      el.textContent = current.substring(0, ci + 1);
+      ci++;
+      if (ci === current.length) { deleting = true; setTimeout(type, 1800); return; }
+    } else {
+      el.textContent = current.substring(0, ci - 1);
+      ci--;
+      if (ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; }
+    }
+    setTimeout(type, deleting ? 38 : 65);
+  }
+  setTimeout(type, 1000);
+
+  // ── SCROLL REVEAL
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        const cards = e.target.parentElement?.querySelectorAll('.reveal') || [];
+        const idx = Array.from(cards).indexOf(e.target);
+        setTimeout(() => e.target.classList.add('visible'), idx * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => observer.observe(r));
+
+  // ── SKILL BARS
+  const bars = document.querySelectorAll('.skill-fill');
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.width = e.target.dataset.pct + '%';
+        barObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  bars.forEach(b => barObserver.observe(b));
+
+  // ── GITHUB API
+  async function loadRepos() {
+    const container = document.getElementById('github-repos');
+    try {
+      const res = await fetch('https://api.github.com/users/m0hiith/repos?sort=updated&per_page=9');
+      if (!res.ok) throw new Error('API error');
+      const repos = await res.json();
+      if (!repos.length) throw new Error('No repos');
+
+      container.innerHTML = '';
+      repos.forEach(repo => {
+        const card = document.createElement('div');
+        card.className = 'repo-card';
+        card.innerHTML = `
+          <div class="repo-name">
+            <a href="${repo.html_url}" target="_blank" style="color:var(--accent2); text-decoration:none;">
+              ${repo.name}
+            </a>
+          </div>
+          <div class="repo-desc">${repo.description || 'No description provided.'}</div>
+          <div class="repo-meta">
+            ${repo.language ? `<span class="repo-lang">● ${repo.language}</span>` : ''}
+            ${repo.stargazers_count > 0 ? `<span>★ ${repo.stargazers_count}</span>` : ''}
+            ${repo.forks_count > 0 ? `<span>⑂ ${repo.forks_count}</span>` : ''}
+            <span>${new Date(repo.updated_at).toLocaleDateString('en-IN', {month:'short', year:'numeric'})}</span>
+          </div>`;
+        container.appendChild(card);
+      });
+    } catch(err) {
+      container.innerHTML = `
+        <div class="loading-repos" style="flex-direction:column; align-items:flex-start;">
+          <span style="color:var(--accent3);">⚠ Could not load live repositories</span>
+          <span style="margin-top:0.5rem;">Visit <a href="https://github.com/m0hiith" target="_blank" style="color:var(--accent2); text-decoration:none;">github.com/m0hiith</a> directly</span>
+        </div>`;
+    }
+  }
+  loadRepos();
+
+  // ── SMOOTH NAV
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+</script>
+</body>
+</html>
