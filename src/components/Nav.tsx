@@ -80,6 +80,33 @@ export default function Nav() {
 
         <div style={{ display: "flex", alignItems: "center", gap: "0.8rem" }}>
           <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden-mobile"
+            style={{
+              fontFamily: "var(--font-mono, monospace)",
+              fontSize: "0.7rem", letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              padding: "0.55rem 1.2rem",
+              border: "1px solid var(--accent)",
+              color: "var(--accent2)",
+              textDecoration: "none",
+              borderRadius: "2px",
+              transition: "all 0.2s",
+            }}
+            onMouseEnter={e => {
+              (e.currentTarget as HTMLElement).style.background = "var(--accent)";
+              (e.currentTarget as HTMLElement).style.color = "#fff";
+            }}
+            onMouseLeave={e => {
+              (e.currentTarget as HTMLElement).style.background = "transparent";
+              (e.currentTarget as HTMLElement).style.color = "var(--accent2)";
+            }}
+          >
+            Resume ↗
+          </a>
+          <a
             href="https://github.com/m0hiith"
             target="_blank"
             rel="noopener noreferrer"
@@ -188,6 +215,22 @@ export default function Nav() {
                 {l}
               </button>
             ))}
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "block",
+                fontFamily: "var(--font-mono, monospace)",
+                fontSize: "0.85rem", letterSpacing: "0.14em",
+                textTransform: "uppercase", color: "var(--accent2)",
+                padding: "1.1rem 0",
+                textDecoration: "none",
+                borderBottom: "1px solid var(--border)",
+              }}
+            >
+              Resume ↗
+            </a>
             <a
               href="https://github.com/m0hiith"
               target="_blank"
