@@ -41,7 +41,7 @@ const projects: {
     name: "Red Rob Ranker",
     desc: "A ranking model published on Hugging Face — leverages machine learning to score and rank items with high precision.",
     tags: ["Python", "Transformers", "HuggingFace", "ML"],
-    link: "https://huggingface.co/m0hiith",
+    link: "https://huggingface.co/spaces/m0hiith/redrob-ranker-sandbox",
     linkType: "huggingface",
     accent: "#f59e0b",
   },
