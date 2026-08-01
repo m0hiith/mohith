@@ -4,19 +4,20 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 const skills = [
-  { name: "AI / ML Engineering", pct: 92, color: "#3b82f6" },
-  { name: "Full-Stack Development", pct: 88, color: "#60a5fa" },
-  { name: "LLM Fine-tuning", pct: 85, color: "#8b5cf6" },
-  { name: "Algorithmic Trading", pct: 82, color: "#06b6d4" },
-  { name: "Digital Marketing", pct: 90, color: "#3b82f6" },
-  { name: "Cloud & DevOps", pct: 75, color: "#60a5fa" },
+  { name: "Embedded & Firmware", pct: 88, color: "#3b82f6" },
+  { name: "Computer Vision / Perception", pct: 90, color: "#06b6d4" },
+  { name: "Python & ML Engineering", pct: 90, color: "#8b5cf6" },
+  { name: "Validation & Test Design", pct: 85, color: "#60a5fa" },
+  { name: "Digital & Circuit Fundamentals", pct: 82, color: "#3b82f6" },
+  { name: "Full-Stack Development", pct: 80, color: "#60a5fa" },
 ];
 
 const techStack = [
-  "Python", "TypeScript", "React", "Next.js",
-  "LangChain", "PyTorch", "FAISS", "Supabase",
-  "Flask", "Tailwind", "Three.js", "AWS",
-  "Gemini API", "Meta Ads", "n8n", "Docker",
+  "ESP8266", "Arduino", "PlatformIO", "Embedded C++",
+  "Python", "OpenCV", "YOLO", "PyTorch",
+  "scikit-learn", "NumPy", "Pandas", "MATLAB",
+  "React", "TypeScript", "Flask", "Supabase",
+  "Git", "Linux",
 ];
 
 function SkillBar({ name, pct, color, delay }: { name: string; pct: number; color: string; delay: number }) {
@@ -75,13 +76,13 @@ export default function About() {
           letterSpacing: "-0.02em",
           marginBottom: "4rem",
         }}>
-          Builder by nature,<br />
+          I work across the<br />
           <span style={{
             background: "linear-gradient(135deg, #3b82f6, #06b6d4)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
-          }}>engineer by training.</span>
+          }}>hardware–software boundary.</span>
         </h2>
 
         <div className="about-grid" style={{
@@ -98,13 +99,13 @@ export default function About() {
             transition={{ duration: 0.7 }}
           >
             <p style={{ color: "var(--muted)", lineHeight: 1.85, fontSize: "1.05rem", marginBottom: "1.4rem" }}>
-              I&apos;m a 3rd-year ECE student at GITAM University, Visakhapatnam, building at the intersection of AI engineering, full-stack development, and entrepreneurship. I don&apos;t just learn — I ship.
+              I&apos;m a final-year B.Tech ECE student (AI &amp; ML specialization) at GITAM University, Visakhapatnam. My internships have been in <span style={{ color: "var(--accent2)", fontWeight: 500 }}>embedded systems &amp; robotics</span> — building computer-vision and hand-gesture perception for robotic control — and in optical fibre communication.
             </p>
             <p style={{ color: "var(--muted)", lineHeight: 1.85, fontSize: "1.05rem", marginBottom: "1.4rem" }}>
-              From fine-tuning LLMs with LoRA/QLoRA on Llama 2 & Mistral, to building RAG pipelines, algorithmic trading bots, and leading the marketing for an 11,000-student festival — I operate across domains simultaneously.
+              I work on both sides of the boundary: firmware bring-up on ESP8266/Arduino-class microcontrollers, sensor and GPIO interfacing, and Python-based test automation and data analysis. I like designing structured, layered systems and then proving them out — unit tests with mocked interfaces, dry-run modes, controlled experiment matrices, reproducible pipelines.
             </p>
             <p style={{ color: "var(--muted)", lineHeight: 1.85, fontSize: "1.05rem", marginBottom: "2.5rem" }}>
-              I founded <span style={{ color: "var(--accent2)", fontWeight: 500 }}>ScaleUp Marketing</span> to solve a real problem: local businesses in Vizag struggling to go digital. Today it generates ₹1L+/month in client revenue.
+              Alongside that I founded <span style={{ color: "var(--accent2)", fontWeight: 500 }}>ScaleUp Marketing</span>, a digital agency serving local businesses across Visakhapatnam, and led marketing for Shore Fest — a university festival that drew 11,000+ attendees.
             </p>
 
             {/* Tech stack chips */}
