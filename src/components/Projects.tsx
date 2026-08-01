@@ -31,57 +31,63 @@ const projects: {
   name: string;
   desc: string;
   tags: string[];
-  link: string;
-  linkType: LinkType;
+  link?: string;
+  linkType?: LinkType;
   accent: string;
 }[] = [
   {
     num: "01",
-    category: "AI / ML",
-    name: "Red Rob Ranker",
-    desc: "A ranking model published on Hugging Face — leverages machine learning to score and rank items with high precision.",
-    tags: ["Python", "Transformers", "HuggingFace", "ML"],
-    link: "https://huggingface.co/spaces/m0hiith/redrob-ranker-sandbox",
-    linkType: "huggingface",
+    category: "EMBEDDED / HARDWARE",
+    name: "NodeMCU ESP8266 — IR Obstacle Detection Node",
+    desc: "Firmware for the NodeMCU 1.0 (ESP-12E) on the Arduino framework via PlatformIO: an IR obstacle sensor on D1 driving a GPIO LED indicator on D2, with a non-blocking 1 Hz heartbeat and a sensor-triggered solid-ON override. Detection polarity is parameterised by a single constant so the same build re-validates against active-low and active-high sensor modules.",
+    tags: ["Embedded C++", "PlatformIO", "ESP8266", "GPIO", "UART"],
+    link: "https://github.com/m0hiith/esp32",
+    linkType: "github",
     accent: "#f59e0b",
   },
   {
     num: "02",
-    category: "AI PRODUCT",
-    name: "TalentSia",
-    desc: "AI career platform with ATS resume builder, skill gap analysis, interest-based career matching, and a job recommendation engine. Reduced avg job-search time by ~35%. 100+ active users.",
-    tags: ["React", "TypeScript", "Supabase", "Tailwind", "Gemini"],
-    link: "https://talentsia.in",
-    linkType: "website",
+    category: "COMPUTER VISION",
+    name: "EdgeHive — Perception Edge Node",
+    desc: "The camera/perception layer of EdgeHive: real-time object detection on live video with bounding boxes, class labels, per-class counts and on-screen FPS. The detector sits behind a source-agnostic detect(frame) → event interface, so the same module runs against webcam, video file or RTSP input without code changes.",
+    tags: ["Python", "YOLO11n", "OpenCV", "RTSP"],
     accent: "#06b6d4",
   },
   {
     num: "03",
-    category: "AI / LEGAL",
-    name: "AI Legal Taxer",
-    desc: "AI-powered legal and tax assistant that simplifies complex legal documents and tax filings, making professional guidance accessible to everyone.",
-    tags: ["React", "TypeScript", "AI", "Legal Tech"],
-    link: "https://github.com/m0hiith/ai-legal-taxer",
-    linkType: "github",
-    accent: "#3b82f6",
-  },
-  {
-    num: "04",
-    category: "DEV TOOLS",
-    name: "My Claude Workspace",
-    desc: "A curated Claude Code workspace with 233+ skills, 60 specialized agents, 75 slash commands, and 20 guardrail rules — a battle-tested AI-assisted development environment.",
-    tags: ["Claude Code", "AI Agents", "DevTools", "Automation"],
-    link: "https://github.com/m0hiith/my-claude-workspace",
+    category: "ML / EXPERIMENTS",
+    name: "Breast Cancer FFNN — Regularization Test Matrix",
+    desc: "A feedforward net for benign vs. malignant classification on the UCI WDBC dataset, with a controlled 2×2 optimizer × loss comparison (SGD/Adam × MSE/BCE). Adam+BCE converged in 31 epochs at 99.12% test accuracy and 0.9944 AUC-ROC. Packaged as a modular pipeline that regenerates every plot, metric and the written report in one command.",
+    tags: ["PyTorch", "scikit-learn", "ROC-AUC", "Reproducible"],
+    link: "https://github.com/m0hiith/breast-cancer-ffnn-pytorch",
     linkType: "github",
     accent: "#8b5cf6",
   },
   {
+    num: "04",
+    category: "AI / RANKING",
+    name: "RedRob — AI Candidate Ranking Engine",
+    desc: "A 7-stage ranking pipeline — parsing, feature extraction, skill matching, experience scoring, weighted aggregation, ranking, reporting — with a multi-factor scoring engine whose weights are tunable independently of pipeline logic. Each stage is an isolated, independently testable module.",
+    tags: ["Python", "NLP", "Pipeline Design", "HuggingFace"],
+    link: "https://huggingface.co/spaces/m0hiith/redrob-ranker-sandbox",
+    linkType: "huggingface",
+    accent: "#3b82f6",
+  },
+  {
     num: "05",
-    category: "GAME / TYPESCRIPT",
-    name: "Solo Levelling",
-    desc: "A Solo Levelling-inspired TypeScript project — anime fan project with game mechanics and immersive UI inspired by the manhwa series.",
-    tags: ["TypeScript", "React"],
-    link: "https://solo-levelling-sigma.vercel.app",
+    category: "SYSTEMS",
+    name: "CryptoBot CLI — Binance Futures Trading Bot",
+    desc: "A strict 4-layer architecture (Client → Orders → Validator → CLI) with HMAC-signed REST calls, 3× exponential backoff on 5xx errors and rotating log files for post-run fault tracing. Ships a dry-run mode, full input validation on symbol/stepSize/tickSize/balance, and unit tests with mocked HTTP at 91% coverage.",
+    tags: ["Python", "Flask", "React", "REST", "Unit Tests"],
+    accent: "#60a5fa",
+  },
+  {
+    num: "06",
+    category: "AI PRODUCT",
+    name: "TalentSia — AI Career Platform",
+    desc: "An AI-powered career platform with an ATS-friendly resume builder (skill-gap feedback, match scores), interest-based career matching, and a job recommendation engine that ranks listings by skill compatibility.",
+    tags: ["React", "TypeScript", "Supabase", "Gemini"],
+    link: "https://talentsia.in",
     linkType: "website",
     accent: "#06b6d4",
   },
@@ -234,11 +240,11 @@ export default function Projects() {
                 padding: "2.2rem",
                 position: "relative",
                 overflow: "hidden",
-                cursor: "pointer",
+                cursor: p.link ? "pointer" : "default",
                 transition: "background 0.25s",
               }}
               whileHover={{ backgroundColor: "#0f1e36" }}
-              onClick={() => window.open(p.link, "_blank")}
+              onClick={() => { if (p.link) window.open(p.link, "_blank"); }}
             >
               <div style={{
                 position: "absolute", top: 0, left: 0, right: 0, height: "1px",
@@ -285,7 +291,17 @@ export default function Projects() {
                 ))}
               </div>
 
-              <LinkButton link={p.link} linkType={p.linkType} accent={p.accent} />
+              {p.link && p.linkType ? (
+                <LinkButton link={p.link} linkType={p.linkType} accent={p.accent} />
+              ) : (
+                <span style={{
+                  fontFamily: "var(--font-mono, monospace)",
+                  fontSize: "0.65rem", letterSpacing: "0.1em",
+                  textTransform: "uppercase", color: "var(--muted)",
+                }}>
+                  Private repo — available on request
+                </span>
+              )}
             </motion.div>
           ))}
         </div>
