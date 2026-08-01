@@ -6,10 +6,10 @@ import { motion } from "framer-motion";
 const Hero3D = lazy(() => import("./Hero3D"));
 
 const phrases = [
+  "Embedded Systems Engineer",
+  "Computer Vision for Robotics",
+  "Firmware Bring-up",
   "AI/ML Engineer",
-  "Full-Stack Builder",
-  "LLM Fine-tuner",
-  "Algo Trader",
   "Founder",
 ];
 
@@ -121,7 +121,7 @@ export default function HeroSection() {
             color: "var(--muted)", fontSize: "1.1rem",
             marginBottom: "0.8rem",
           }}>
-            B.Tech ECE · GITAM University, Visakhapatnam
+            B.Tech ECE (AI &amp; ML) · GITAM University, Visakhapatnam
           </p>
 
           <div style={{ marginBottom: "3rem" }}>
@@ -187,10 +187,10 @@ export default function HeroSection() {
           }}
         >
           {[
-            { num: "4+", label: "AI Products Shipped" },
+            { num: "2", label: "Engineering Internships" },
             { num: "11K+", label: "Event Attendees Led" },
-            { num: "6+", label: "ScaleUp Clients" },
-            { num: "22%", label: "F1 Score Improvement" },
+            { num: "99.1%", label: "Best Model Accuracy" },
+            { num: "91%", label: "Test Coverage Shipped" },
           ].map((s) => (
             <div key={s.label}>
               <div style={{
