@@ -63,7 +63,7 @@ export default function Contact() {
           margin: "0 auto 3rem",
           lineHeight: 1.7,
         }}>
-          I&apos;m open to internships, freelance projects, and building cool things. Reach out anytime.
+          I&apos;m open to roles in embedded systems, robotics and AI/ML — internships, full-time, or freelance builds. Reach out anytime.
         </p>
 
         <motion.a
