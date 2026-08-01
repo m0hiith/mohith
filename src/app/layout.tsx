@@ -15,13 +15,13 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Mohith Pinninti — AI Engineer & Builder",
+  title: "Mohith Pinninti — Embedded Systems, Robotics & AI/ML",
   description:
-    "Portfolio of Mohith Pinninti — ECE student at GITAM, AI/ML engineer, full-stack builder, and founder of ScaleUp Marketing.",
+    "Portfolio of Mohith Pinninti — final-year B.Tech ECE (AI & ML) at GITAM. Embedded firmware, computer vision for robotic control, and Python-based test automation.",
   openGraph: {
-    title: "Mohith Pinninti — AI Engineer & Builder",
-    description: "ECE · AI/ML · Full-Stack · Founder",
-    url: "https://m0hiith.github.io",
+    title: "Mohith Pinninti — Embedded Systems, Robotics & AI/ML",
+    description: "ECE (AI & ML) · Embedded · Computer Vision · Robotics",
+    url: "https://mohith.site",
   },
 };
 
