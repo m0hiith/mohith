@@ -187,10 +187,10 @@ export default function HeroSection() {
           }}
         >
           {[
-            { num: "2", label: "Engineering Internships" },
-            { num: "11K+", label: "Event Attendees Led" },
-            { num: "99.1%", label: "Best Model Accuracy" },
-            { num: "91%", label: "Test Coverage Shipped" },
+            { num: "2", label: "Internships" },
+            { num: "11K+", label: "Attendees Led" },
+            { num: "99.1%", label: "Model Accuracy" },
+            { num: "91%", label: "Test Coverage" },
           ].map((s) => (
             <div key={s.label}>
               <div style={{
@@ -220,12 +220,13 @@ export default function HeroSection() {
         transition={{ duration: 0.9, delay: 0.2, ease: "easeOut" }}
         style={{
           position: "absolute",
-          right: "4rem",
-          bottom: 0,
+          right: "6rem",
+          // Anchored near the top so the figure runs alongside the name
+          // block rather than sinking to the bottom of the screen.
+          top: "6.5rem",
           zIndex: 3,
-          height: "85vh",
           display: "flex",
-          alignItems: "flex-end",
+          alignItems: "flex-start",
           pointerEvents: "none",
         }}
       >
@@ -245,11 +246,14 @@ export default function HeroSection() {
           src="/mohith-avatar.png"
           alt="Mohith Pinninti"
           style={{
-            height: "100%",
-            maxHeight: "720px",
+            // Sized by height so the 3:4 figure never crops or distorts;
+            // width follows the aspect ratio, capped so it stays clear of
+            // the text column on narrower desktops.
+            height: "min(76vh, 700px)",
             width: "auto",
+            maxWidth: "36vw",
             objectFit: "contain",
-            objectPosition: "bottom",
+            objectPosition: "top",
             position: "relative",
             zIndex: 1,
             filter: "drop-shadow(0 0 40px rgba(59,130,246,0.3))",
