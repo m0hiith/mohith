@@ -92,6 +92,13 @@ body {
 
 .hidden-mobile { display: flex; }
 
+/* Nav folds into the drawer early: the logo, five links and three CTAs
+   stop fitting on one row well above the mobile breakpoint. */
+@media (max-width: 1024px) {
+  .hidden-mobile { display: none !important; }
+  .nav-hamburger { display: flex !important; }
+}
+
 /* ─── Mobile / Tablet ─── */
 @media (max-width: 768px) {
   .hidden-mobile { display: none !important; }
