@@ -5,6 +5,12 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const links = ["About", "Experience", "Projects", "GitHub", "Contact"];
 
+const ctas = [
+  { label: "Resume", href: "/resume.pdf" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/m0hiith/" },
+  { label: "GitHub", href: "https://github.com/m0hiith" },
+];
+
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -79,60 +85,37 @@ export default function Nav() {
         </ul>
 
         <div style={{ display: "flex", alignItems: "center", gap: "0.8rem" }}>
-          <a
-            href="/resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden-mobile"
-            style={{
-              fontFamily: "var(--font-mono, monospace)",
-              fontSize: "0.7rem", letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              padding: "0.55rem 1.2rem",
-              border: "1px solid var(--accent)",
-              color: "var(--accent2)",
-              textDecoration: "none",
-              borderRadius: "2px",
-              transition: "all 0.2s",
-            }}
-            onMouseEnter={e => {
-              (e.currentTarget as HTMLElement).style.background = "var(--accent)";
-              (e.currentTarget as HTMLElement).style.color = "#fff";
-            }}
-            onMouseLeave={e => {
-              (e.currentTarget as HTMLElement).style.background = "transparent";
-              (e.currentTarget as HTMLElement).style.color = "var(--accent2)";
-            }}
-          >
-            Resume ↗
-          </a>
-          <a
-            href="https://github.com/m0hiith"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden-mobile"
-            style={{
-              fontFamily: "var(--font-mono, monospace)",
-              fontSize: "0.7rem", letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              padding: "0.55rem 1.2rem",
-              border: "1px solid var(--accent)",
-              color: "var(--accent2)",
-              textDecoration: "none",
-              borderRadius: "2px",
-              transition: "all 0.2s",
-            }}
-            onMouseEnter={e => {
-              (e.currentTarget as HTMLElement).style.background = "var(--accent)";
-              (e.currentTarget as HTMLElement).style.color = "#fff";
-            }}
-            onMouseLeave={e => {
-              (e.currentTarget as HTMLElement).style.background = "transparent";
-              (e.currentTarget as HTMLElement).style.color = "var(--accent2)";
-            }}
-          >
-            GitHub ↗
-          </a>
+          {ctas.map(c => (
+            <a
+              key={c.label}
+              href={c.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden-mobile"
+              style={{
+                fontFamily: "var(--font-mono, monospace)",
+                fontSize: "0.7rem", letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                padding: "0.55rem 1.2rem",
+                border: "1px solid var(--accent)",
+                color: "var(--accent2)",
+                textDecoration: "none",
+                borderRadius: "2px",
+                whiteSpace: "nowrap",
+                transition: "all 0.2s",
+              }}
+              onMouseEnter={e => {
+                (e.currentTarget as HTMLElement).style.background = "var(--accent)";
+                (e.currentTarget as HTMLElement).style.color = "#fff";
+              }}
+              onMouseLeave={e => {
+                (e.currentTarget as HTMLElement).style.background = "transparent";
+                (e.currentTarget as HTMLElement).style.color = "var(--accent2)";
+              }}
+            >
+              {c.label} ↗
+            </a>
+          ))}
 
           {/* Hamburger — mobile only */}
           <button
@@ -215,37 +198,25 @@ export default function Nav() {
                 {l}
               </button>
             ))}
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: "block",
-                fontFamily: "var(--font-mono, monospace)",
-                fontSize: "0.85rem", letterSpacing: "0.14em",
-                textTransform: "uppercase", color: "var(--accent2)",
-                padding: "1.1rem 0",
-                textDecoration: "none",
-                borderBottom: "1px solid var(--border)",
-              }}
-            >
-              Resume ↗
-            </a>
-            <a
-              href="https://github.com/m0hiith"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: "block",
-                fontFamily: "var(--font-mono, monospace)",
-                fontSize: "0.85rem", letterSpacing: "0.14em",
-                textTransform: "uppercase", color: "var(--accent2)",
-                padding: "1.1rem 0",
-                textDecoration: "none",
-              }}
-            >
-              GitHub ↗
-            </a>
+            {ctas.map((c, i) => (
+              <a
+                key={c.label}
+                href={c.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "block",
+                  fontFamily: "var(--font-mono, monospace)",
+                  fontSize: "0.85rem", letterSpacing: "0.14em",
+                  textTransform: "uppercase", color: "var(--accent2)",
+                  padding: "1.1rem 0",
+                  textDecoration: "none",
+                  borderBottom: i < ctas.length - 1 ? "1px solid var(--border)" : undefined,
+                }}
+              >
+                {c.label} ↗
+              </a>
+            ))}
           </motion.div>
         )}
       </AnimatePresence>
