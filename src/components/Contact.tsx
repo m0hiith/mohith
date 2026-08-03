@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 
 const socials = [
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/m0hiith/" },
   { label: "GitHub", href: "https://github.com/m0hiith" },
   { label: "Email", href: "mailto:mohith4pinninti@gmail.com" },
   { label: "+91 70321 16746", href: "tel:+917032116746" },
