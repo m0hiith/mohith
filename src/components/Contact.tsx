@@ -2,7 +2,11 @@
 
 import { motion } from "framer-motion";
 
+const RESUME_URL =
+  "https://www.dropbox.com/scl/fi/bw6wuowyony5enzu90zep/mohith-resume-final.pdf?rlkey=4wpojk59qsjyugujg5tuzmhvj&st=41w7t83u&dl=0";
+
 const socials = [
+  { label: "Resume", href: RESUME_URL },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/m0hiith/" },
   { label: "GitHub", href: "https://github.com/m0hiith" },
   { label: "Email", href: "mailto:mohith4pinninti@gmail.com" },

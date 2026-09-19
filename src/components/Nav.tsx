@@ -5,8 +5,11 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const links = ["About", "Experience", "Projects", "GitHub", "Contact"];
 
+const RESUME_URL =
+  "https://www.dropbox.com/scl/fi/bw6wuowyony5enzu90zep/mohith-resume-final.pdf?rlkey=4wpojk59qsjyugujg5tuzmhvj&st=41w7t83u&dl=0";
+
 const ctas = [
-  { label: "Resume", href: "/resume.pdf" },
+  { label: "Resume", href: RESUME_URL },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/m0hiith/" },
   { label: "GitHub", href: "https://github.com/m0hiith" },
 ];
